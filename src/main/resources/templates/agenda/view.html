@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-cmn-Hans">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<style>
+div > img {
+  max-height: 80%;
+  max-width: 80%;
+}
+</style>
+</head>
+<body>
+  <p th:text="${data.evn}"></p>
+  <p th:text="${data.evd}"></p>
+  <a href="add-agenda">加入这个活动</a>
+  <p>补充</p>
+  <div th:each="attachment,iterStat : ${data.attachments}">
+    <a th:if="${!#strings.isEmpty(attachment.fjurl)}" th:href="@{${#strings.replace(attachment.fjurl,'getSnapshot','getContent')}}"> 
+      <img alt="" th:src="${attachment.fjurl}">
+    </a>
+    <p th:text="${attachment.fjn}"></p>
+  </div>
+  <a class="open-mwxing">打开 冥王星</a>
+<script type="text/javascript">
+var $as = document.querySelectorAll('a.open-mwxing');
+
+if(navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
+  document.write("iOS");
+//  window.location.href = "itms-apps://itunes.apple.com/cn/app/海约/id1265041589?mt=8"; //ios app协议
+//  window.setTimeout(function() {
+//      window.location.href = "https://***";
+//  }, 2000);
+} else if(navigator.userAgent.match(/android/i)) {
+  document.write("Android");
+  $as[0].addEventListener('touchend', function() {
+    window.location.href = "cn.sh.com.xj.timeApp://app"; //android app协议
+//  window.setTimeout(function() {
+//  window.location.href = "https://fir.im/d2z3"; //android 下载地址
+//}, 2000);
+  }
+} else {
+  document.write(navigator.userAgent);
+}
+
+//避免touchmove事件影响touchend
+stopTouchendPropagationAfterScroll();
+
+function stopTouchendPropagationAfterScroll() {
+    var flag = false;
+    window.addEventListener('touchmove', function(ev) {
+        flag || (flag = true, window.addEventListener('touchend', stopTouchendPropagation, true));
+    }, false);
+
+    function stopTouchendPropagation(ev) {
+        ev.stopPropagation();
+        setTimeout(function() {
+            window.removeEventListener('touchend', stopTouchendPropagation, true);
+            flag = false;
+        }, 50);
+    }
+}
+</script>
+</body>
+</html>

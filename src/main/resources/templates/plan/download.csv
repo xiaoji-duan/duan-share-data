@@ -1,0 +1,4 @@
+"日期","时间","类型","标题","完成状态"
+[# th:each="item,iterStat : ${data.items}"]
+"[(${item.evd})]","[(${item.evt})]","[(${item.type == 0? '日程' : '其它'})]","[(${item.evn})]","[(${item.wc == 0 ? '完成' : '未完成'})]"
+[/]

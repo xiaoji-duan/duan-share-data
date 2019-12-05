@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-cmn-Hans">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+  <p th:text="${data.jn}">暂无样式</p>
+  <a href="download.html" th:href="@{~/shs/{datatype}/download/{day}/{shareid}(datatype=${datatype},day=${day},shareid=${shareid})}">下载csv</a>
+  <div th:each="item,iterStat : ${data.items}">
+    <p th:text="${item.evn}">暂无样式</p>
+    <p th:text="${item.evd}">暂无样式</p>
+  </div>
+  <a class="open-mwxing">打开 冥王星</a>
+<script type="text/javascript">
+var $as = document.querySelectorAll('a.open-mwxing');
+
+if(navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
+  document.write("iOS");
+//  window.location.href = "itms-apps://itunes.apple.com/cn/app/海约/id1265041589?mt=8"; //ios app协议
+//  window.setTimeout(function() {
+//      window.location.href = "https://***";
+//  }, 2000);
+} else if(navigator.userAgent.match(/android/i)) {
+  document.write("Android");
+  $as[0].addEventListener('touchend', function() {
+    window.location.href = "cn.sh.com.xj.timeApp://app"; //android app协议
+//  window.setTimeout(function() {
+//  window.location.href = "https://fir.im/d2z3"; //android 下载地址
+//}, 2000);
+  }
+} else {
+  document.write(navigator.userAgent);
+}
+
+//避免touchmove事件影响touchend
+stopTouchendPropagationAfterScroll();
+
+function stopTouchendPropagationAfterScroll() {
+    var flag = false;
+    window.addEventListener('touchmove', function(ev) {
+        flag || (flag = true, window.addEventListener('touchend', stopTouchendPropagation, true));
+    }, false);
+
+    function stopTouchendPropagation(ev) {
+        ev.stopPropagation();
+        setTimeout(function() {
+            window.removeEventListener('touchend', stopTouchendPropagation, true);
+            flag = false;
+        }, 50);
+    }
+}
+</script>
+</body>
+</html>
