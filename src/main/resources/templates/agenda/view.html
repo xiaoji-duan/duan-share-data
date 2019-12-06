@@ -8,16 +8,30 @@
   content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <style>
+body {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
 div > img {
   max-height: 80%;
   max-width: 80%;
 }
 </style>
+<title th:text="${data.evn}">冥王星 活动</title>
 </head>
 <body>
-  <p th:text="${data.evn}"></p>
-  <p th:text="${data.evd}"></p>
-  <a href="add-agenda">加入这个活动</a>
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header" th:text="${data.evd}">
+		    Featured
+		  </div>
+		  <div class="card-body">
+        <p class="card-text" th:text="${data.evn}">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="add-agenda" class="btn btn-primary">加入这个活动</a>
+		  </div>
+		</div>
+  </div>
   <p>补充</p>
   <div th:each="attachment,iterStat : ${data.attachments}">
     <a th:if="${!#strings.isEmpty(attachment.fjurl)}" th:href="@{${#strings.replace(attachment.fjurl,'getSnapshot','getContent')}}"> 
