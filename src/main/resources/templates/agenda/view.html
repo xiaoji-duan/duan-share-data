@@ -28,7 +28,7 @@ div > img {
 		  </div>
 		  <div class="card-body">
         <p class="card-text" th:text="${data.evn}">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="add-agenda" class="btn btn-primary">加入这个活动</a>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">加入这个活动</button>
 		  </div>
 		</div>
   </div>
@@ -40,6 +40,39 @@ div > img {
     <p th:text="${attachment.fjn}"></p>
   </div>
   <a class="open-mwxing">打开 冥王星</a>
+  
+	<div class="modal" id="loginModal" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">冥王星帐户验证</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <form>
+            <input type="hidden" id="from_phoneno" th:value="${data.share_from.phoneno}">
+            <input type="hidden" id="from_name" th:value="${data.share_from.name}">
+            <input type="hidden" id="data_phoneno" th:value="${data.ui}">
+            <input type="hidden" id="data_id" th:value="${data.evi}">
+	          <div class="form-group">
+	            <label for="user-name" class="col-form-label">帐号:</label>
+	            <input type="text" class="form-control" id="user-name" required>
+	          </div>
+	          <div class="form-group">
+	            <label for="user-password" class="col-form-label">密码:</label>
+	            <input type="password" class="form-control" id="user-password" required>
+	          </div>
+	        </form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+	        <button type="button" class="btn btn-primary" id="login">确定</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 <script type="text/javascript">
 var $as = document.querySelectorAll('a.open-mwxing');
 
@@ -56,7 +89,7 @@ if(navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
 //  window.setTimeout(function() {
 //  window.location.href = "https://fir.im/d2z3"; //android 下载地址
 //}, 2000);
-  }
+  });
 } else {
   document.write(navigator.userAgent);
 }
@@ -79,8 +112,82 @@ function stopTouchendPropagationAfterScroll() {
     }
 }
 </script>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script type="text/javascript">
+$(function() {
+  var sendJoinRequest = function(userinfo, from, data) {
+    $.ajax({
+      type: "POST",
+      url: "https://pluto.guobaa.com/cdc/mwxing_data_join_start/json/trigger",
+      data: JSON.stringify({
+        userinfo: userinfo,
+        deviceId: "web_wxshare",
+        from: from,
+        data: data
+      }),
+      contentType: "application/json",
+      dataType: "json",
+      success: function(resp) {
+        $('#loginModal').modal('hide');
+        alert("加入请求发送成功");
+      },
+      error: function() {}
+    });
+  }
+  
+  var getUserinfo = function(openid) {
+    $.ajax({
+      type: "GET",
+      url: "https://pluto.guobaa.com/aup/user/" + openid + "/userinfo",
+      data: "",
+      dataType: "json",
+      success: function(resp) {
+        if (resp && resp.data) {
+          var userinfo = resp.data;
+          delete userinfo.avatar;
+          delete userinfo.avatarbase64;
+          
+          sendJoinRequest(userinfo, {
+            phoneno: $("#from_phoneno").val(),
+            name: $("#from_name").val(),
+          }, {
+            datatype: "Agenda",
+            datas: [{
+	            phoneno: $("#data_phoneno").val(),
+	            id: $("#data_id").val()
+	          }]}
+          );
+        }
+      },
+      error: function(error) {
+        alert("login error");
+      }
+    });
+  }
+  
+  $("#login").click(function() {
+    $.ajax({
+      type: "POST",
+      url: "https://pluto.guobaa.com/aup/dologin",
+      contentType: "application/json",
+      data: JSON.stringify({
+        phoneno: $("#user-name").val(),
+        userpassword: $("#user-password").val()
+      }),
+      dataType: "json",
+      success: function(resp) {
+        if (resp && resp.openid) {
+          getUserinfo(resp.openid);
+        }
+      },
+      error: function(error) {
+        alert("login error");
+      }
+    });
+  });
+});
+</script>
 </body>
 </html>

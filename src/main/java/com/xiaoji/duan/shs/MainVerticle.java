@@ -195,6 +195,7 @@ public class MainVerticle extends AbstractVerticle {
 		String filepath = dirpath + "/" + shareid + ".json";
 		
 		JsonObject data = req.getJsonObject("payload", new JsonObject());
+		data.put("share_from", req.getJsonObject("from", new JsonObject()));
 		
 		vertx.fileSystem().mkdirsBlocking(dirpath);
 		vertx.fileSystem().writeFile(filepath, data.toBuffer(), write -> {
