@@ -180,6 +180,8 @@ $(function() {
       success: function(resp) {
         if (resp && resp.openid) {
           getUserinfo(resp.openid);
+        } else {
+          alert(resp.errmsg);
         }
       },
       error: function(error) {
