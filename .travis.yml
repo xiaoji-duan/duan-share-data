@@ -1,0 +1,22 @@
+os: linux
+dist: xenial
+language: java
+addons:
+  apt:
+    update: true
+    packages:
+      - sshpass
+before_install:
+  - export SSHPASS=$ALIYUN_PASS
+  - $TRAVIS_BUILD_DIR/mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+script:
+  - $TRAVIS_BUILD_DIR/mvnw clean package
+after_script:
+  - if [[ $? = 0 ]] then sshpass -e scp -r stricthostkeychecking=no $TRAVIS_BUILD_DIR/target/*-fat.jar root@47.110.153.154:/opt/duan/shs/ ; fi
+  - if [[ $? = 0 ]] then sshpass -e ssh -o StrictHostKeyChecking=no root@47.110.153.154 service shs restart ; fi
+env:
+  global:
+  - LANG=zh_CN.UTF-8
+  - JAVA_HOME=/usr/lib/jvm/java-8-oracle
+jdk:
+  - oraclejdk8
