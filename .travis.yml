@@ -15,7 +15,7 @@ script:
   - $TRAVIS_BUILD_DIR/mvnw clean package
 after_script:
   - ls -la $TRAVIS_BUILD_DIR/target/
-  - if [[ -f "$TRAVIS_BUILD_DIR/target/shs-1.0.0-SNAPSHOT-fat.jar" ]]; then sshpass -e scp -v $TRAVIS_BUILD_DIR/target/shs-1.0.0-SNAPSHOT-fat.jar root@47.110.153.154:/opt/duan/shs/ ; fi
+  - if [[ -f "$TRAVIS_BUILD_DIR/target/shs-1.0.0-SNAPSHOT-fat.jar" ]]; then sshpass -e scp -v $TRAVIS_BUILD_DIR/target/shs-1.0.0-SNAPSHOT-fat.jar root@47.110.153.154:/opt/duan/shs/shs-1.0.0-SNAPSHOT-fat.jar ; fi
   - if [[ -f "$TRAVIS_BUILD_DIR/target/shs-1.0.0-SNAPSHOT-fat.jar" ]]; then sshpass -e ssh -o StrictHostKeyChecking=no root@47.110.153.154 service shs restart ; fi
 env:
   global:
