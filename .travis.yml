@@ -14,8 +14,8 @@ before_install:
 script:
   - $TRAVIS_BUILD_DIR/mvnw clean package
 after_script:
-  - if [[ $? = 0 ]]; then sshpass -e scp stricthostkeychecking=no $TRAVIS_BUILD_DIR/target/shs-1.0.0-SNAPSHOT-fat.jar root@47.110.153.154:/opt/duan/shs/ ; fi
-  - if [[ $? = 0 ]]; then sshpass -e ssh -o StrictHostKeyChecking=no root@47.110.153.154 service shs restart ; fi
+  - if [[ -f "$TRAVIS_BUILD_DIR/target/shs-1.0.0-SNAPSHOT-fat.jar" ]]; then sshpass -e scp stricthostkeychecking=no $TRAVIS_BUILD_DIR/target/shs-1.0.0-SNAPSHOT-fat.jar root@47.110.153.154:/opt/duan/shs/ ; fi
+  - if [[ -f "$TRAVIS_BUILD_DIR/target/shs-1.0.0-SNAPSHOT-fat.jar" ]]; then sshpass -e ssh -o StrictHostKeyChecking=no root@47.110.153.154 service shs restart ; fi
 env:
   global:
   - LANG=zh_CN.UTF-8
