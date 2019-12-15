@@ -1,5 +1,6 @@
 os: linux
 dist: trusty
+sudo: true
 language: java
 addons:
   apt:
@@ -8,6 +9,7 @@ addons:
       - sshpass
 before_install:
   - export SSHPASS=$ALIYUN_PASS
+  - chmod +x $TRAVIS_BUILD_DIR/mvnw
   - $TRAVIS_BUILD_DIR/mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script:
   - $TRAVIS_BUILD_DIR/mvnw clean package
