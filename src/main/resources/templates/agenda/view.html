@@ -1,195 +1,714 @@
 <!doctype html>
 <html lang="zh-cmn-Hans">
 <head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-  content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<style>
-body {
-  padding-top: 8px;
-  padding-bottom: 8px;
-}
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <style>
 
-div > img {
-  max-height: 80%;
-  max-width: 80%;
-}
-</style>
-<title th:text="${data.evn}">冥王星 活动</title>
+    @media (min-width: 992px) {
+      html {
+        font-size: 20px;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      html {
+        font-size: 20px;
+      }
+    }
+
+    body {
+      padding-top: 0px;
+      padding-bottom: 8px;
+      font-family: 'PingFangSC', 'PingFangSC-Regular', 'Microsoft YaHei', '微软雅黑', 'STXihei', '华文细黑', 'Georgia', 'Times New Roman', 'serif';
+    }
+
+    .container {
+      padding-right: 0px;
+      padding-left: 0px;
+    }
+
+    .header {
+      background-color: rgba(181, 217, 217, 1);
+      padding-bottom: 133%;
+      width: 100%;
+      position: relative;
+    }
+
+    .header-date {
+      color: rgba(255, 255, 255, 1);
+      text-align: center;
+      font-size: 1.5rem;
+      top: 11%;
+      position: absolute;
+      font-weight: bold;
+      letter-spacing: 1px;
+      width: 100%;
+    }
+
+    .header-title {
+      font-size: 1.25rem;
+      color: rgba(255, 255, 255, 1);
+      text-align: center;
+      position: absolute;
+      letter-spacing: 1px;
+      top: 17.7%;
+      width: 100%
+    }
+
+    .header-sn {
+      height: 62.5%;
+      width: 100%;
+      top: 17.5%;
+      position: absolute
+    }
+
+    .snwarp {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      padding: 10% 3% 3% 3%;
+    }
+
+    .sninner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: white;
+    }
+
+    .snsize {
+      width: 100%;
+      height: 100%;
+      padding: 10px;
+    }
+
+    .sn {
+      width: 100%;
+      height: 100%;
+      border: 3px solid rgba(210, 232, 232, 1);
+    }
+
+    .sn-1 {
+      margin: 5% 10%;
+      font-size: 1.125rem;
+      color: rgba(136, 191, 191, 1);
+      height: 90%;
+      overflow: hidden;
+      font-weight: 600;
+      text-align: center;
+      letter-spacing: 2px
+    }
+
+    .personwarp {
+      position: absolute;
+      bottom: 4%;
+      left: calc(50% - 40px);
+      width: 80px;
+      height: 80px;
+      background: rgba(131, 181, 181, .3);
+      border-radius: 50%;
+      z-index: 3
+    }
+
+    .person {
+      position: relative;
+      margin: 5%;
+      height: 90%;
+      width: 90%;
+      text-align: center;
+      background: rgba(131, 181, 181, .8);
+      border-radius: 50%;
+      align-items: center;
+      color: rgba(255, 255, 255, 1);
+      font-size: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .person span {
+      width: 50%
+    }
+
+    .snback {
+      height: 62.5%;
+      width: 100%;
+      top: 17.5%;
+      position: absolute;
+      background-image: url('https://pluto.guobaa.com/cal/sharesite/agenda/header-sn-back.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      z-index: 1;
+    }
+
+    .headerback {
+      position: absolute;
+      background-image: url('https://pluto.guobaa.com/cal/sharesite/agenda/header-back.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      z-index: 2;
+    }
+
+    .content {
+      min-height: 400px;
+      width: 100%;
+      align-items: center;
+      margin-bottom: -50px
+    }
+
+    .contentWarp {
+      width: 90%;
+      margin: 0 5%
+    }
+
+    .content-title {
+      text-align: center;
+      height: 120px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: default;
+      position: relative;
+    }
+
+    .content-title span {
+      width: 100%;
+      height: 75px;
+      line-height: 75px;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 1);
+      background: rgba(136, 191, 191, 1);
+      box-shadow: 2px 3px 7px 0px rgba(158, 158, 158, 0.6);
+      border-radius: 10px;
+      z-index: 7
+    }
+
+
+    .line {
+      height: calc(100% + 4px);
+      background: rgba(131, 181, 181, 1);
+      border-radius: 4px;
+      z-index: 5;
+      top: 0px;
+      width: 4px;
+      position: absolute;
+    }
+
+    .line1 {
+      left: 15%;
+    }
+
+    .line2 {
+      left: 30%;
+    }
+
+    .line3 {
+      left: 70%;
+    }
+
+    .line4 {
+      left: 85%;
+    }
+
+    .line5 {
+      height: calc(25% + 4px);
+      left: 30%
+    }
+
+    .line6 {
+      height: calc(25% + 4px);
+      left: 40%
+    }
+
+    .line7 {
+      height: calc(25% + 4px);
+      left: 60%
+    }
+
+    .line8 {
+      height: calc(25% + 4px);
+      left: 70%
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      background: rgba(181, 217, 217, 1);
+      border-radius: 50%;
+      z-index: 8;
+    }
+
+    .dot1 {
+      left: calc(15% - 3px);
+      top: 20%;
+    }
+
+    .dot2 {
+      left: calc(30% - 3px);
+      top: 20%;
+    }
+
+    .dot3 {
+
+      left: calc(70% - 3px);
+      top: 20%;
+    }
+
+    .dot4 {
+
+      left: calc(85% - 3px);
+      top: 20%;
+    }
+
+    .dot5 {
+      left: calc(15% - 5px);
+      top: 0px;
+    }
+
+    .dot6 {
+      left: calc(30% - 5px);
+      top: 0px;
+
+    }
+
+    .dot7 {
+      left: calc(70% - 1px);
+      top: 0px;
+    }
+
+    .dot8 {
+      left: calc(85% - 1px);
+      top: 0px;
+    }
+
+    .dot9 {
+      left: calc(30% - 3px);
+      top: 25%;
+      z-index: 8;
+    }
+
+    .dot10 {
+      left: calc(40% - 3px);
+      top: 25%;
+      z-index: 8;
+    }
+
+
+    .dot11 {
+      left: calc(60% - 3px);
+      top: 25%;
+      z-index: 8;
+    }
+
+    .dot12 {
+      left: calc(70% - 3px);
+      top: 25%;
+      z-index: 8;
+    }
+
+    .content-1 {
+      background: rgba(254, 254, 254, 1);
+      border: 3px solid rgba(210, 232, 232, 1);
+      box-shadow: 2px 3px 7px 0px rgba(158, 158, 158, 0.18);
+      border-radius: 10px;
+      position: relative;
+      z-index: 1;
+      padding: 40px 20px;
+    }
+
+    .content-2 {
+      width: 98%;
+      margin: 10px 1%;
+      display: inline-block;
+    }
+
+    .contentattr {
+      width: 100%;
+      text-align: center;
+      display: inline-block;
+    }
+
+    .contentimg {
+      width: 90%;
+    }
+
+    .contenttext {
+      font-size: 1rem;
+      color: rgba(51, 51, 51, 1);
+    }
+
+    .foot {
+      background-color: rgba(181, 217, 217, 1);
+      padding-bottom: 88.4%;
+      width: 100%;
+      position: relative;
+      z-index: 0
+    }
+
+    .joinwarp {
+      background-color: rgba(255, 255, 255, 1);
+      box-shadow: 2px 3px 7px 0px rgba(102, 174, 174, 0.6);
+      border-radius: 10px;
+      position: absolute;
+      top: 25%;
+      left: 25%;
+      width: 50%;
+      height: 60px;
+      font-size: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: default;
+      text-align: center;
+      z-index: 7;
+    }
+
+    .joinwarp button {
+      width: 100%;
+      background: transparent;
+      border-width: 0;
+      font-size: 16px;
+      letter-spacing: 1px;
+      color: rgba(62, 147, 147, 1);
+    }
+
+    .downloadwarp {
+      background: linear-gradient(-56deg, rgba(136, 54, 231, .4) 0%, rgba(75, 191, 191, .4) 100%);
+      position: absolute;
+      bottom: 25%;
+      left: calc(50% - 80px);
+      width: 160px;
+      height: 52px;
+      border-radius: 26px;
+      z-index: 3;
+    }
+
+    .download {
+      background: linear-gradient(-56deg, rgba(84, 185, 185, 0.72) 0%, rgba(213, 87, 255, 0.72) 100%);
+      box-shadow: 0px 0px 10px 0px rgba(21, 154, 154, 0.5);
+      position: relative;
+      margin: 2.5px 2px;
+      height: 47px;
+      width: 155px;
+      text-align: center;
+      border-radius: 23.5px;
+      font-size: 18px;
+      display: flex;
+      color: rgba(255, 255, 255, 1);
+      justify-content: center;
+      align-items: center;
+      cursor: default;
+    }
+
+    .foot-back {
+      position: absolute;
+      background-image: url('https://pluto.guobaa.com/cal/sharesite/agenda/foot-back.png');
+      background-size: 100% 50%;
+      background-position-y: bottom;
+      background-repeat: no-repeat;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      z-index: 1;
+    }
+
+  </style>
+  <title th:text="${data.evn}">冥王星 活动</title>
 </head>
 <body>
-  <div class="container-fluid">
-    <div class="card">
-      <div class="card-header" th:text="${data.evd}">
-		    Featured
-		  </div>
-		  <div class="card-body">
-        <p class="card-text" th:text="${data.evn}">With supporting text below as a natural lead-in to additional content.</p>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">加入这个活动</button>
-		  </div>
-		</div>
-  </div>
-  <p>补充</p>
-  <div th:each="attachment,iterStat : ${data.attachments}">
-    <a th:if="${!#strings.isEmpty(attachment.fjurl)}" th:href="@{${#strings.replace(attachment.fjurl,'getSnapshot','getContent')}}"> 
-      <img alt="" th:src="${attachment.fjurl}">
-    </a>
-    <p th:text="${attachment.fjn}"></p>
-  </div>
-  <a class="open-mwxing">打开 冥王星</a>
-  
-	<div class="modal" id="loginModal" tabindex="-1" role="dialog">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title">冥王星帐户验证</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	        <form>
-            <input type="hidden" id="from_phoneno" th:value="${data.share_from.phoneno}">
-            <input type="hidden" id="from_name" th:value="${data.share_from.name}">
-            <input type="hidden" id="data_phoneno" th:value="${data.ui}">
-            <input type="hidden" id="data_id" th:value="${data.evi}">
-	          <div class="form-group">
-	            <label for="user-name" class="col-form-label">帐号:</label>
-	            <input type="text" class="form-control" id="user-name" required>
-	          </div>
-	          <div class="form-group">
-	            <label for="user-password" class="col-form-label">密码:</label>
-	            <input type="password" class="form-control" id="user-password" required>
-	          </div>
-	        </form>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-	        <button type="button" class="btn btn-primary" id="login">确定</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-<script type="text/javascript">
-var $as = document.querySelectorAll('a.open-mwxing');
+<div class="container">
+  <div class="header">
+    <div class="header-date">
+      <span th:text="${data.evd}"></span>
+    </div>
+    <div class="header-title">
+      <span>来自XXXX的邀请</span>
+    </div>
+    <div class="header-sn">
+      <div class="snwarp">
+        <div class="sninner">
+          <div class="snsize">
+            <div class="sn">
+              <div class="sn-1" th:text="${data.evn}">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-if(navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
-  document.write("iOS");
+    <div class="personwarp">
+      <div class="person">
+        <span>10人参与</span>
+      </div>
+
+    </div>
+    <div class="snback"></div>
+    <div class="headerback"></div>
+  </div>
+  <div class="content">
+    <div class="contentWarp">
+      <div class="content-title">
+        <div class="line line1">
+        </div>
+        <div class="line line2">
+        </div>
+        <div class="line line3">
+        </div>
+        <div class="line line4">
+        </div>
+
+        <div class="dot dot1">
+        </div>
+
+        <div class="dot dot2">
+        </div>
+
+        <div class="dot dot3">
+        </div>
+
+        <div class="dot dot4">
+        </div>
+
+        <span>活动补充</span>
+      </div>
+      <div class="content-1">
+
+        <div class="dot dot5">
+        </div>
+
+        <div class="dot dot6">
+        </div>
+
+        <div class="dot dot7">
+        </div>
+
+        <div class="dot dot8">
+        </div>
+        <div class="content-2" th:each="attachment,iterStat : ${data.attachments}">
+          <a th:if="${!#strings.isEmpty(attachment.fjurl)}"
+             th:href="@{${#strings.replace(attachment.fjurl,'getSnapshot','getContent')}}"
+             class="contentattr"
+          >
+            <img alt="" th:src="${attachment.fjurl}" class="contentimg">
+          </a>
+          <span th:text="${attachment.fjn}" class="contenttext"></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="foot">
+
+
+    <div class="line line5">
+    </div>
+
+    <div class="line line6">
+    </div>
+
+    <div class="line line7">
+    </div>
+
+    <div class="line line8">
+    </div>
+
+    <div class="dot dot9">
+    </div>
+
+    <div class="dot dot10">
+    </div>
+
+    <div class="dot dot11">
+    </div>
+
+    <div class="dot dot12">
+    </div>
+
+    <div class="joinwarp">
+      <button type="button" data-toggle="modal" data-target="#loginModal">加入这个活动
+      </button>
+    </div>
+
+    <div class="downloadwarp">
+      <div class="download">
+        <span style="letter-spacing: 1px">下载冥王星</span>
+      </div>
+
+    </div>
+
+    <div class="foot-back">
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="loginModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">冥王星帐户验证</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <input type="hidden" id="from_phoneno" th:value="${data.share_from.phoneno}">
+          <input type="hidden" id="from_name" th:value="${data.share_from.name}">
+          <input type="hidden" id="data_phoneno" th:value="${data.ui}">
+          <input type="hidden" id="data_id" th:value="${data.evi}">
+          <div class="form-group">
+            <label for="user-name" class="col-form-label">帐号:</label>
+            <input type="text" class="form-control" id="user-name" required>
+          </div>
+          <div class="form-group">
+            <label for="user-password" class="col-form-label">密码:</label>
+            <input type="password" class="form-control" id="user-password" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" id="login">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  var $as = document.querySelectorAll('a.open-mwxing');
+
+  if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
+    document.write("iOS");
 //  window.location.href = "itms-apps://itunes.apple.com/cn/app/海约/id1265041589?mt=8"; //ios app协议
 //  window.setTimeout(function() {
 //      window.location.href = "https://***";
 //  }, 2000);
-} else if(navigator.userAgent.match(/android/i)) {
-  document.write("Android");
-  $as[0].addEventListener('touchend', function() {
-    window.location.href = "cn.sh.com.xj.timeApp://app"; //android app协议
+  } else if (navigator.userAgent.match(/android/i)) {
+    document.write("Android");
+    $as[0].addEventListener('touchend', function () {
+      window.location.href = "cn.sh.com.xj.timeApp://app"; //android app协议
 //  window.setTimeout(function() {
 //  window.location.href = "https://fir.im/d2z3"; //android 下载地址
 //}, 2000);
-  });
-} else {
-  document.write(navigator.userAgent);
-}
+    });
+  } else {
+    document.write(navigator.userAgent);
+  }
 
-//避免touchmove事件影响touchend
-stopTouchendPropagationAfterScroll();
+  //避免touchmove事件影响touchend
+  stopTouchendPropagationAfterScroll();
 
-function stopTouchendPropagationAfterScroll() {
+  function stopTouchendPropagationAfterScroll() {
     var flag = false;
-    window.addEventListener('touchmove', function(ev) {
-        flag || (flag = true, window.addEventListener('touchend', stopTouchendPropagation, true));
+    window.addEventListener('touchmove', function (ev) {
+      flag || (flag = true, window.addEventListener('touchend', stopTouchendPropagation, true));
     }, false);
 
     function stopTouchendPropagation(ev) {
-        ev.stopPropagation();
-        setTimeout(function() {
-            window.removeEventListener('touchend', stopTouchendPropagation, true);
-            flag = false;
-        }, 50);
+      ev.stopPropagation();
+      setTimeout(function () {
+        window.removeEventListener('touchend', stopTouchendPropagation, true);
+        flag = false;
+      }, 50);
     }
-}
+  }
 </script>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 <script type="text/javascript">
-$(function() {
-  var sendJoinRequest = function(userinfo, from, data) {
-    $.ajax({
-      type: "POST",
-      url: "https://pluto.guobaa.com/cdc/mwxing_data_join_start/json/trigger",
-      data: JSON.stringify({
-        userinfo: userinfo,
-        deviceId: "web_wxshare",
-        from: from,
-        data: data
-      }),
-      contentType: "application/json",
-      dataType: "json",
-      success: function(resp) {
-        $('#loginModal').modal('hide');
-        alert("加入请求发送成功");
-      },
-      error: function() {}
-    });
-  }
-  
-  var getUserinfo = function(openid) {
-    $.ajax({
-      type: "GET",
-      url: "https://pluto.guobaa.com/aup/user/" + openid + "/userinfo",
-      data: "",
-      dataType: "json",
-      success: function(resp) {
-        if (resp && resp.data) {
-          var userinfo = resp.data;
-          delete userinfo.avatar;
-          delete userinfo.avatarbase64;
-          
-          sendJoinRequest(userinfo, {
-            phoneno: $("#from_phoneno").val(),
-            name: $("#from_name").val(),
-          }, {
-            datatype: "Agenda",
-            datas: [{
-	            phoneno: $("#data_phoneno").val(),
-	            id: $("#data_id").val()
-	          }]}
-          );
+  $(function () {
+    var sendJoinRequest = function (userinfo, from, data) {
+      $.ajax({
+        type: "POST",
+        url: "https://pluto.guobaa.com/cdc/mwxing_data_join_start/json/trigger",
+        data: JSON.stringify({
+          userinfo: userinfo,
+          deviceId: "web_wxshare",
+          from: from,
+          data: data
+        }),
+        contentType: "application/json",
+        dataType: "json",
+        success: function (resp) {
+          $('#loginModal').modal('hide');
+          alert("加入请求发送成功");
+        },
+        error: function () {
         }
-      },
-      error: function(error) {
-        alert("login error");
-      }
-    });
-  }
-  
-  $("#login").click(function() {
-    $.ajax({
-      type: "POST",
-      url: "https://pluto.guobaa.com/aup/dologin",
-      contentType: "application/json",
-      data: JSON.stringify({
-        phoneno: $("#user-name").val(),
-        userpassword: $("#user-password").val()
-      }),
-      dataType: "json",
-      success: function(resp) {
-        if (resp && resp.openid) {
-          getUserinfo(resp.openid);
-        } else {
-          alert(resp.errmsg);
+      });
+    }
+
+    var getUserinfo = function (openid) {
+      $.ajax({
+        type: "GET",
+        url: "https://pluto.guobaa.com/aup/user/" + openid + "/userinfo",
+        data: "",
+        dataType: "json",
+        success: function (resp) {
+          if (resp && resp.data) {
+            var userinfo = resp.data;
+            delete userinfo.avatar;
+            delete userinfo.avatarbase64;
+
+            sendJoinRequest(userinfo, {
+                phoneno: $("#from_phoneno").val(),
+                name: $("#from_name").val(),
+              }, {
+                datatype: "Agenda",
+                datas: [{
+                  phoneno: $("#data_phoneno").val(),
+                  id: $("#data_id").val()
+                }]
+              }
+            );
+          }
+        },
+        error: function (error) {
+          alert("login error");
         }
-      },
-      error: function(error) {
-        alert("login error");
-      }
+      });
+    }
+
+    $("#login").click(function () {
+      $.ajax({
+        type: "POST",
+        url: "https://pluto.guobaa.com/aup/dologin",
+        contentType: "application/json",
+        data: JSON.stringify({
+          phoneno: $("#user-name").val(),
+          userpassword: $("#user-password").val()
+        }),
+        dataType: "json",
+        success: function (resp) {
+          if (resp && resp.openid) {
+            getUserinfo(resp.openid);
+          } else {
+            alert(resp.errmsg);
+          }
+        },
+        error: function (error) {
+          alert("login error");
+        }
+      });
     });
   });
-});
 </script>
 </body>
 </html>
