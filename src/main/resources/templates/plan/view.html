@@ -1,59 +1,404 @@
 <!doctype html>
 <html lang="zh-cmn-Hans">
 <head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-  content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <style>
+    @media (min-width: 992px) {
+      html {
+        font-size: 20px;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      html {
+        font-size: 20px;
+      }
+    }
+
+    body {
+      padding-top: 0px;
+      padding-bottom: 8px;
+      background:rgba(213,240,246,.8);
+      font-family: 'PingFangSC', 'PingFangSC-Regular', 'Microsoft YaHei', '微软雅黑', 'STXihei', '华文细黑', 'Georgia', 'Times New Roman', 'serif';
+    }
+
+    .container {
+      padding-right: 0px;
+      padding-left: 0px;
+      background: url('https://pluto.guobaa.com/cal/sharesite/plan/plan-back.png');
+      background-size: 100%;
+      background-repeat-y: repeat;
+    }
+
+    .header {
+      padding-bottom: 60%;
+      width: 100%;
+      position: relative;
+    }
+
+
+    .header-title {
+      color: rgba(255, 255, 255, 1);
+      text-align: center;
+      position: absolute;
+      letter-spacing: 1px;
+      top: 50%;
+      width: 70%;
+      background: url(https://pluto.guobaa.com/cal/sharesite/plan/border-2.png);
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      height: 52px;
+      left: 15%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .header-title span{
+      white-space: nowrap;
+      max-width: 90%;
+      overflow: hidden;
+      text-overflow: clip;
+      font-size: 1.4rem;
+    }
+    .content {
+      min-height: 400px;
+      width: 100%;
+      align-items: center;
+      margin-bottom: -50px
+    }
+
+    .contentWarp {
+      width: 90%;
+      margin: 0 5%
+    }
+
+    .content-title span {
+      width: 100%;
+      height: 75px;
+      line-height: 75px;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 1);
+      box-shadow: 2px 3px 7px 0px rgba(158, 158, 158, 0.6);
+      border-radius: 10px;
+      z-index: 7
+    }
+
+    .contenttext {
+      font-size: 1rem;
+      color: rgba(51, 51, 51, 1);
+    }
+
+    .foot {
+      padding-bottom: 75%;
+      width: 100%;
+      position: relative;
+      z-index: 0
+    }
+
+    .joinwarp button {
+      width: 100%;
+      background: transparent;
+      border-width: 0;
+      font-size: 16px;
+      letter-spacing: 1px;
+      color: rgba(62, 147, 147, 1);
+    }
+
+    .downloadwarp {
+      background: linear-gradient(-56deg, rgba(136, 54, 231, .4) 0%, rgba(75, 191, 191, .4) 100%);
+      position: absolute;
+      bottom: 25%;
+      left: calc(50% - 80px);
+      width: 160px;
+      height: 52px;
+      border-radius: 26px;
+      z-index: 3;
+    }
+
+    .download {
+      background: linear-gradient(-56deg, rgba(84, 185, 185, 0.72) 0%, rgba(213, 87, 255, 0.72) 100%);
+      box-shadow: 0px 0px 10px 0px rgba(21, 154, 154, 0.5);
+      position: relative;
+      margin: 2.5px 2px;
+      height: 47px;
+      width: 155px;
+      text-align: center;
+      border-radius: 23.5px;
+      font-size: 18px;
+      display: flex;
+      color: rgba(255, 255, 255, 1);
+      justify-content: center;
+      align-items: center;
+      cursor: default;
+    }
+
+    .timeline {
+      list-style: none;
+      padding: 20px 0 20px;
+      position: relative;
+    }
+
+    .timeline:before {
+      top: 0;
+      bottom: 0;
+      position: absolute;
+      content: " ";
+      width: 4px;
+      /*background-color: #eeeeee;*/
+      left: 50%;
+      margin-left: -1.5px;
+      border-left: 4px dotted rgba(133,195,194,1);
+    }
+
+    .timeline > li {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .timeline > li:before,
+    .timeline > li:after {
+      content: " ";
+      display: table;
+    }
+
+    .timeline > li:after {
+      clear: both;
+    }
+
+    .timeline > li:before,
+    .timeline > li:after {
+      content: " ";
+      display: table;
+    }
+
+    .timeline > li:after {
+      clear: both;
+    }
+
+    .timeline > li > .timeline-panel {
+      width: 46%;
+      float: left;
+      padding: 20px;
+      position: relative;
+      background:rgba(213,240,246,.8);
+      border-radius:4px;
+    }
+
+    .timeline > li > .timeline-panel:before {
+      position: absolute;
+      top: 26px;
+      right: -15px;
+      display: inline-block;
+      border-top: 15px solid transparent;
+      border-left: 15px solid transparent;
+      border-right: 0 solid transparent;
+      border-bottom: 15px solid transparent;
+      content: " ";
+    }
+
+    .timeline > li > .timeline-panel:after {
+      position: absolute;
+      top: 27px;
+      right: -14px;
+      display: inline-block;
+      border-top: 14px solid transparent;
+      border-left: 14px solid rgba(213,240,246,.8);;
+      border-right: 0 solid rgba(213,240,246,.8);;
+      border-bottom: 14px solid transparent;
+      content: " ";
+    }
+
+    .timeline > li > .timeline-badge {
+      width: 10px;
+      height: 24px;
+      top: 16px;
+      left: 50%;
+      position: absolute;
+      margin-left: -25px;
+      z-index: 100;
+      background: url('https://pluto.guobaa.com/cal/sharesite/plan/line.png');
+      background-size: 100%;
+      background-repeat-y: repeat;
+    }
+
+
+
+    .timeline-badge > span{
+      color:rgba(33,93,166,1);
+      font-size: 1rem;
+      position: absolute;
+      width: 50px;
+    }
+
+    .timeline > li.timeline-inverted > .timeline-panel {
+      float: right;
+    }
+
+    .timeline > li.timeline-inverted > .timeline-panel:before {
+      border-left-width: 0;
+      border-right-width: 15px;
+      left: -15px;
+      right: auto;
+    }
+
+    .timeline > li.timeline-inverted > .timeline-panel:after {
+      border-left-width: 0;
+      border-right-width: 14px;
+      left: -14px;
+      right: auto;
+    }
+
+    .timeline-title {
+      margin-top: 0;
+      color: inherit;
+    }
+
+    .timeline-body > p,
+    .timeline-body > ul {
+      margin-bottom: 0;
+    }
+
+    .timeline-body > p + p {
+      margin-top: 5px;
+    }
+    .timeline-heading h4{
+      color:rgba(33,93,166,1);
+      font-size: 0.9rem;
+    }
+    .timeline-body p {
+      color:rgba(33,93,166,1);
+      font-size: .9rem;
+    }
+    .timeline-foot p {
+      color:rgba(142,141,141,1);
+    }
+
+    @media (max-width: 767px) {
+      ul.timeline:before {
+        left: 40px;
+      }
+
+      ul.timeline > li > .timeline-panel {
+        width: calc(100% - 90px);
+        width: -moz-calc(100% - 90px);
+        width: -webkit-calc(100% - 90px);
+      }
+
+      ul.timeline > li > .timeline-badge {
+        left: 35px;
+        margin-left: 0;
+        top: 25px;
+      }
+      .timeline-badge > span{
+        left: -50px;
+      }
+
+      ul.timeline > li > .timeline-panel {
+        float: right;
+      }
+
+      ul.timeline > li > .timeline-panel:before {
+        border-left-width: 0;
+        border-right-width: 15px;
+        left: -15px;
+        right: auto;
+      }
+
+      ul.timeline > li > .timeline-panel:after {
+        border-left-width: 0;
+        border-right-width: 14px;
+        left: -14px;
+        right: auto;
+      }
+    }
+
+  </style>
 </head>
 <body>
-  <p th:text="${data.jn}">暂无样式</p>
-  <a href="download.html" th:href="@{~/shs/{datatype}/download/{day}/{shareid}(datatype=${datatype},day=${day},shareid=${shareid})}">下载csv</a>
-  <div th:each="item,iterStat : ${data.items}">
-    <p th:text="${item.evn}">暂无样式</p>
-    <p th:text="${item.evd}">暂无样式</p>
-  </div>
-  <a class="open-mwxing">打开 冥王星</a>
-<script type="text/javascript">
-var $as = document.querySelectorAll('a.open-mwxing');
 
-if(navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
-  document.write("iOS");
+<div class="container">
+  <div class="header">
+    <div class="header-title">
+      <span th:text="${data.jn}">暂无样式</span>
+    </div>
+  </div>
+  <div class="content">
+    <div class="contentWarp">
+      <ul class="timeline">
+        <li th:each="item,iterStat : ${data.items}" th:class="${iterStat.odd}?'':'timeline-inverted'">
+          <div class="timeline-badge "  >
+            <!--<span th:text="${item.evd}" ></span>-->
+            <span >05-20</span>
+          </div>
+          <div class="timeline-panel">
+            <div class="timeline-heading">
+              <h4 class="timeline-title"  th:text="${item.evd}" >14:09</h4>
+              <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 地址：上海市</small></p>
+            </div>
+            <div class="timeline-body">
+              <p th:text="${item.evn}"></p>
+              <span><small class="text-muted"><i class="glyphicon glyphicon-time"></i> --席理加</small></span>
+              <span style=" float: right;"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 参与20人</small></span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot">
+    <div class="downloadwarp">
+      <div class="download">
+        <span style="letter-spacing: 1px">下载冥王星</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script type="text/javascript">
+  var $as = document.querySelectorAll('a.open-mwxing');
+
+  if(navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
+    document.write("iOS");
 //  window.location.href = "itms-apps://itunes.apple.com/cn/app/海约/id1265041589?mt=8"; //ios app协议
 //  window.setTimeout(function() {
 //      window.location.href = "https://***";
 //  }, 2000);
-} else if(navigator.userAgent.match(/android/i)) {
-  document.write("Android");
-  $as[0].addEventListener('touchend', function() {
-    window.location.href = "cn.sh.com.xj.timeApp://app"; //android app协议
+  } else if(navigator.userAgent.match(/android/i)) {
+    document.write("Android");
+    $as[0].addEventListener('touchend', function() {
+      window.location.href = "cn.sh.com.xj.timeApp://app"; //android app协议
 //  window.setTimeout(function() {
 //  window.location.href = "https://fir.im/d2z3"; //android 下载地址
 //}, 2000);
+    }
+  } else {
+    document.write(navigator.userAgent);
   }
-} else {
-  document.write(navigator.userAgent);
-}
 
-//避免touchmove事件影响touchend
-stopTouchendPropagationAfterScroll();
+  //避免touchmove事件影响touchend
+  stopTouchendPropagationAfterScroll();
 
-function stopTouchendPropagationAfterScroll() {
+  function stopTouchendPropagationAfterScroll() {
     var flag = false;
     window.addEventListener('touchmove', function(ev) {
-        flag || (flag = true, window.addEventListener('touchend', stopTouchendPropagation, true));
+      flag || (flag = true, window.addEventListener('touchend', stopTouchendPropagation, true));
     }, false);
 
     function stopTouchendPropagation(ev) {
-        ev.stopPropagation();
-        setTimeout(function() {
-            window.removeEventListener('touchend', stopTouchendPropagation, true);
-            flag = false;
-        }, 50);
+      ev.stopPropagation();
+      setTimeout(function() {
+        window.removeEventListener('touchend', stopTouchendPropagation, true);
+        flag = false;
+      }, 50);
     }
-}
+  }
 </script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
