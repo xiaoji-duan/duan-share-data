@@ -234,6 +234,8 @@ public class MainVerticle extends AbstractVerticle {
 							
 							ctx.put("exist", Boolean.TRUE);
 							ctx.put("data", filejson.mapTo(Map.class));
+							ctx.put("dateformat", new SimpleDateFormat("yyyy/MM/dd"));
+							ctx.put("datetimeformat", new SimpleDateFormat("yyyy/MM/dd HH:mm"));
 
 							ctx.next();
 						} else {
