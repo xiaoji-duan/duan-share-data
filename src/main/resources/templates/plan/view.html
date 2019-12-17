@@ -378,9 +378,11 @@
   </div>
   <div class="foot">
     <div class="downloadwarp">
+      <a href="https://fir.im/d2z3">
       <div class="download">
-        <span style="letter-spacing: 1px">下载冥王星</span>
+          <span style="letter-spacing: 1px">下载冥王星</span>
       </div>
+      </a>
     </div>
 
   </div>
@@ -388,23 +390,23 @@
 <script type="text/javascript">
   var $as = document.querySelectorAll('a.open-mwxing');
 
-  if(navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
-    document.write("iOS");
-//  window.location.href = "itms-apps://itunes.apple.com/cn/app/海约/id1265041589?mt=8"; //ios app协议
-//  window.setTimeout(function() {
-//      window.location.href = "https://***";
-//  }, 2000);
-  } else if(navigator.userAgent.match(/android/i)) {
-    document.write("Android");
-    $as[0].addEventListener('touchend', function() {
-      window.location.href = "cn.sh.com.xj.timeApp://app"; //android app协议
-//  window.setTimeout(function() {
-//  window.location.href = "https://fir.im/d2z3"; //android 下载地址
-//}, 2000);
-    }
-  } else {
-    document.write(navigator.userAgent);
-  }
+//   if(navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
+//     document.write("iOS");
+// //  window.location.href = "itms-apps://itunes.apple.com/cn/app/海约/id1265041589?mt=8"; //ios app协议
+// //  window.setTimeout(function() {
+// //      window.location.href = "https://***";
+// //  }, 2000);
+//   } else if(navigator.userAgent.match(/android/i)) {
+//     document.write("Android");
+//     $as[0].addEventListener('touchend', function() {
+//       window.location.href = "cn.sh.com.xj.timeApp://app"; //android app协议
+// //  window.setTimeout(function() {
+// //  window.location.href = "https://fir.im/d2z3"; //android 下载地址
+// //}, 2000);
+//     }
+//   } else {
+//     document.write(navigator.userAgent);
+//   }
 
   //避免touchmove事件影响touchend
   stopTouchendPropagationAfterScroll();
