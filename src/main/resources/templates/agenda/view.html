@@ -41,6 +41,17 @@
     }
 
     .header-date {
+      font-size: 1.25rem;
+      color: rgba(255, 255, 255, 1);
+      text-align: center;
+      position: absolute;
+      letter-spacing: 1px;
+      top: 17.7%;
+      width: 100%;
+      z-index:3;
+    }
+
+    .header-title {
       color: rgba(255, 255, 255, 1);
       text-align: center;
       font-size: 1.5rem;
@@ -49,16 +60,7 @@
       font-weight: bold;
       letter-spacing: 1px;
       width: 100%;
-    }
-
-    .header-title {
-      font-size: 1.25rem;
-      color: rgba(255, 255, 255, 1);
-      text-align: center;
-      position: absolute;
-      letter-spacing: 1px;
-      top: 17.7%;
-      width: 100%
+      z-index:3;
     }
 
     .header-sn {
@@ -98,10 +100,19 @@
       margin: 5% 10%;
       font-size: 1.125rem;
       color: rgba(136, 191, 191, 1);
-      height: 90%;
+      height: 70%;
       overflow: hidden;
       font-weight: 600;
       text-align: center;
+      letter-spacing: 2px
+    }
+    .sn-2 {
+      margin: 0 10%;
+      font-size: 1rem;
+      color: rgba(136, 191, 191, 1);
+      height: 10%;
+      overflow: hidden;
+      text-align: right;
       letter-spacing: 2px
     }
 
@@ -159,7 +170,6 @@
     }
 
     .content {
-      min-height: 400px;
       width: 100%;
       align-items: center;
       margin-bottom: -50px
@@ -325,6 +335,7 @@
       position: relative;
       z-index: 1;
       padding: 40px 20px;
+      min-height: 450px;
     }
 
     .content-2 {
@@ -423,17 +434,156 @@
       z-index: 1;
     }
 
+    .modal-content{
+      width: 80%;
+      margin:0 auto;
+      border-radius: 8px;
+      border:0;
+    }
+    .modal-header{
+      background-image: url('https://pluto.guobaa.com/cal/sharesite/agenda/login-back.png');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      border-radius: 2px;
+      color:rgba(255,255,255,1);
+      text-align: center;
+      height: 64px;
+    }
+    .modal-header h5{
+      font-size: 1.125rem;
+      width:100%;
+    }
+
+    .modal-body {
+      margin-top: 25px;
+    }
+    button.close{
+      position: fixed;
+      top: 85%;
+      left: 48%;
+      font-size: 20px;
+      color: rgba(255,255,255,1);
+      width: 36px;
+      height: 35px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,1);
+    }
+
+    /* form starting stylings ------------------------------- */
+    .group 			  {
+      position:relative;
+      margin-bottom:30px;
+    }
+    input 				{
+      font-size:18px;
+      padding:10px 10px 10px 5px;
+      display:block;
+      width:100%;
+      border:none;
+      border-bottom:1px solid rgba(199,208,211,1);
+    }
+    input:focus 		{ outline:none; }
+    .group .btn{
+      width: 80%;
+      height: 40px;
+      background:rgba(24,107,131,1);
+      border-radius:39px;
+      font-size:1rem;
+      color:rgba(255,255,255,1);
+    }
+
+    /* LABEL ======================================= */
+    label 				 {
+      color:rgba(151,151,151,1);
+      font-size:1rem;
+      font-weight:normal;
+      position:absolute;
+      pointer-events:none;
+      left:5px;
+      top:10px;
+      transition:0.2s ease all;
+      -moz-transition:0.2s ease all;
+      -webkit-transition:0.2s ease all;
+    }
+
+    /* active state */
+    input:focus ~ label, input:valid ~ label 		{
+      top:-20px;
+      font-size:1rem;
+      color:rgba(24,107,131,1);
+    }
+
+    /* BOTTOM BARS ================================= */
+    .bar 	{ position:relative; display:block; width:100%; }
+    .bar:before, .bar:after 	{
+      content:'';
+      height:2px;
+      width:0;
+      bottom:1px;
+      position:absolute;
+      background:rgba(24,107,131,1);
+      transition:0.2s ease all;
+      -moz-transition:0.2s ease all;
+      -webkit-transition:0.2s ease all;
+    }
+    .bar:before {
+      left:50%;
+    }
+    .bar:after {
+      right:50%;
+    }
+
+    /* active state */
+    input:focus ~ .bar:before, input:focus ~ .bar:after {
+      width:50%;
+    }
+
+    /* HIGHLIGHTER ================================== */
+    .highlight {
+      position:absolute;
+      height:60%;
+      width:100px;
+      top:25%;
+      left:0;
+      pointer-events:none;
+      opacity:0.5;
+    }
+
+    /* active state */
+    input:focus ~ .highlight {
+      -webkit-animation:inputHighlighter 0.3s ease;
+      -moz-animation:inputHighlighter 0.3s ease;
+      animation:inputHighlighter 0.3s ease;
+    }
+
+    /* ANIMATIONS ================ */
+    @-webkit-keyframes inputHighlighter {
+      from { background:#5264AE; }
+      to 	{ width:0; background:transparent; }
+    }
+    @-moz-keyframes inputHighlighter {
+      from { background:#5264AE; }
+      to 	{ width:0; background:transparent; }
+    }
+    @keyframes inputHighlighter {
+      from { background:#5264AE; }
+      to 	{ width:0; background:transparent; }
+    }
+
+    button:focus{
+      outline: 0px auto -webkit-focus-ring-color;
+    }
   </style>
-  <title th:text="${data.evn}">冥王星 活动</title>
+  <title>活动分享</title>
 </head>
 <body>
 <div class="container">
   <div class="header">
-    <div class="header-date">
-      <span th:text="${data.evd}"></span>
-    </div>
     <div class="header-title">
-      <span>来自XXXX的邀请</span>
+      <span th:text="${data.creator.ran + '的活动分享'}"></span>
+    </div>
+    <div class="header-date">
+      <span th:if="${data.evd!= ''}" th:text="${#dates.format(dateformat.parse(data.evd),'yyyy-MM-dd')}"></span>
     </div>
     <div class="header-sn">
       <div class="snwarp">
@@ -441,6 +591,8 @@
           <div class="snsize">
             <div class="sn">
               <div class="sn-1" th:text="${data.evn}">
+              </div>
+              <div class="sn-2" th:text="${'时间：'+ data.evt}">
               </div>
             </div>
           </div>
@@ -450,7 +602,7 @@
 
     <div class="personwarp">
       <div class="person">
-        <span>10人参与</span>
+        <span th:text="${data.pn + '人参与'}"></span>
       </div>
 
     </div>
@@ -498,9 +650,9 @@
         </div>
         <div class="content-2" th:each="attachment,iterStat : ${data.attachments}">
           <a th:if="${!#strings.isEmpty(attachment.fjurl)}"
-             th:href="@{${#strings.replace(attachment.fjurl,'getSnapshot','getContent')}}"
-             class="contentattr"
-          >
+             class="contentattr" >
+            <!--th:href="@{${#strings.replace(attachment.fjurl,'getSnapshot','getContent')}}"-->
+
             <img alt="" th:src="${attachment.fjurl}" class="contentimg">
           </a>
           <span th:text="${attachment.fjn}" class="contenttext"></span>
@@ -542,10 +694,11 @@
     </div>
 
     <div class="downloadwarp">
-      <div class="download">
-        <span style="letter-spacing: 1px">下载冥王星</span>
-      </div>
-
+      <a href="https://fir.im/d2z3">
+        <div class="download">
+          <span style="letter-spacing: 1px">下载冥王星</span>
+        </div>
+      </a>
     </div>
 
     <div class="foot-back">
@@ -553,14 +706,12 @@
   </div>
 </div>
 
-<div class="modal" id="loginModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
+
+<div class="modal fade"  id="loginModal" tabindex="-1" role="dialog"  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">冥王星帐户验证</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <h5 class="modal-title" id="exampleModalCenterTitle">冥王星帐户验证</h5>
       </div>
       <div class="modal-body">
         <form>
@@ -568,34 +719,43 @@
           <input type="hidden" id="from_name" th:value="${data.share_from.name}">
           <input type="hidden" id="data_phoneno" th:value="${data.ui}">
           <input type="hidden" id="data_id" th:value="${data.evi}">
-          <div class="form-group">
-            <label for="user-name" class="col-form-label">帐号:</label>
-            <input type="text" class="form-control" id="user-name" required>
+
+          <div class="group">
+            <input type="text"  id="user-name" required>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>帐号</label>
           </div>
-          <div class="form-group">
-            <label for="user-password" class="col-form-label">密码:</label>
-            <input type="password" class="form-control" id="user-password" required>
+
+          <div class="group">
+            <input type="password"  id="user-password" required>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>密码</label>
+          </div>
+          <div class="group" style="text-align: center;">
+            <button type="button" class="btn" id="login">确定</button>
           </div>
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-primary" id="login">确定</button>
-      </div>
     </div>
+
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
 </div>
 <script type="text/javascript">
   var $as = document.querySelectorAll('a.open-mwxing');
 
   if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
-    document.write("iOS");
+    // document.write("iOS");
 //  window.location.href = "itms-apps://itunes.apple.com/cn/app/海约/id1265041589?mt=8"; //ios app协议
 //  window.setTimeout(function() {
 //      window.location.href = "https://***";
 //  }, 2000);
   } else if (navigator.userAgent.match(/android/i)) {
-    document.write("Android");
+    // document.write("Android");
     $as[0].addEventListener('touchend', function () {
       window.location.href = "cn.sh.com.xj.timeApp://app"; //android app协议
 //  window.setTimeout(function() {
@@ -603,7 +763,7 @@
 //}, 2000);
     });
   } else {
-    document.write(navigator.userAgent);
+    // document.write(navigator.userAgent);
   }
 
   //避免touchmove事件影响touchend
