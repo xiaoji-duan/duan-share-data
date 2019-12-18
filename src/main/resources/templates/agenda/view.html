@@ -649,7 +649,7 @@
         <div class="dot dot8">
         </div>
         <div class="content-2" th:each="attachment,iterStat : ${data.attachments}">
-          <a th:if="${!#strings.isEmpty(attachment.fjurl)}"
+          <a th:if=" @{${#strings.replace(attachment.fjurl,'getSnapshot','getContent')}}"
              class="contentattr" >
             <!--th:href="@{${#strings.replace(attachment.fjurl,'getSnapshot','getContent')}}"-->
 
