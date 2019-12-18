@@ -649,11 +649,11 @@
         <div class="dot dot8">
         </div>
         <div class="content-2" th:each="attachment,iterStat : ${data.attachments}">
-          <a th:if=" @{${#strings.replace(attachment.fjurl,'getSnapshot','getContent')}}"
+          <a th:if="${!#strings.isEmpty(attachment.fjurl)}"
              class="contentattr" >
             <!--th:href="@{${#strings.replace(attachment.fjurl,'getSnapshot','getContent')}}"-->
 
-            <img alt="" th:src="${attachment.fjurl}" class="contentimg">
+            <img alt="" th:src="@{${#strings.replace(attachment.fjurl,'getSnapshot','getContent')}}" class="contentimg">
           </a>
           <span th:text="${attachment.fjn}" class="contenttext"></span>
         </div>
