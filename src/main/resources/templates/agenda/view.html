@@ -655,7 +655,8 @@
              class="contentattr" >
             <!--th:href="@{${#strings.replace(attachment.fjurl,'getSnapshot','getContent')}}"-->
 
-            <img alt="" th:src="@{${#strings.replace(attachment.fjurl,'getSnapshot','getContent')}}" class="contentimg">
+            <!-- img alt="" th:src="@{${#strings.replace(attachment.fjurl,'getSnapshot','getContent')}}" class="contentimg"-->
+            <img alt="" th:src="@{${attachment.fjurl}}" class="contentimg">
           </a>
           <span th:text="${attachment.fjn}" class="contenttext"></span>
         </div>
