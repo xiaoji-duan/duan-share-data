@@ -112,7 +112,7 @@
       color: rgba(136, 191, 191, 1);
       height: 10%;
       overflow: hidden;
-      text-align: right;
+      text-align: center;
       letter-spacing: 2px
     }
 
@@ -584,6 +584,7 @@
     </div>
     <div class="header-date">
       <span th:if="${data.evd!= ''}" th:text="${#dates.format(dateformat.parse(data.evd),'yyyy-MM-dd')}"></span>
+      <span th:if="${data.evt!= ''}" th:text="${data.evt}"></span>
     </div>
     <div class="header-sn">
       <div class="snwarp">
@@ -592,7 +593,8 @@
             <div class="sn">
               <div class="sn-1" th:text="${data.evn}">
               </div>
-              <div class="sn-2" th:text="${'时间：'+ data.evt}">
+              <div class="sn-2">
+                <span  th:if="${data.adr != ''&& data.adr != null}"  th:text="${'地址：'+ data.adr}"></span>
               </div>
             </div>
           </div>
